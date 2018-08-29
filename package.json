@@ -1,0 +1,22 @@
+{
+  "name": "webdev-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnrocha1/webdev-backend.git"
+  },
+  "author": "Daniyel Rocha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dnrocha1/webdev-backend/issues"
+  },
+  "homepage": "https://github.com/dnrocha1/webdev-backend#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
