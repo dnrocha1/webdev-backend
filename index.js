@@ -1,15 +1,15 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 const PORT = 3000;
 
-const conta = require('./server/routes/conta.route');
-const amigo = require('./server/routes/amigo.route');
-const grupo = require('./server/routes/grupo.route');
+const conta = require('./server/conta/conta.route');
+const amigo = require('./server/amigo/amigo.route');
+const grupo = require('./server/grupo/grupo.route');
 
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('Página Inicial'))
 
 
 /**

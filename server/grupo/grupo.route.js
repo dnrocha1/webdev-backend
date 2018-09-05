@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const controller = require('../controllers/amigo.controller');
+const controller = require('./grupo.controller');
 
 router.get('/', controller.get);
 router.get('/:id', controller.get);
