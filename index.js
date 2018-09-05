@@ -31,5 +31,6 @@ app.use('/amigo', amigo);
 app.use('/grupo', grupo);
 
 
-
 app.listen(PORT, () => console.log('Example app listening on port 3000!'));
+
+module.exports = app;
