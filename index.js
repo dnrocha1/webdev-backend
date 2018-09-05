@@ -4,6 +4,9 @@ const morgan = require('morgan');
 
 const PORT = 3000;
 
+app.use(morgan('tiny'));
+app.use(express.static('static'));
+
 const conta = require('./server/conta/conta.route');
 const amigo = require('./server/amigo/amigo.route');
 const grupo = require('./server/grupo/grupo.route');
