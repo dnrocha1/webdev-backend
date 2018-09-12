@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const cache = require('memory-cache');
 
 const PORT = process.env.PORT || 3000;
 
@@ -30,6 +31,20 @@ app.use('/amigo', amigo);
  */
 app.use('/grupo', grupo);
 
+
+//3
+cache.put('houdini', 'disappear', 1500, (key, value) => {
+    console.log(key + ' did ' + value);
+    console.log('----------------------')
+});
+
+//1
+console.log('Houdini will now ' + cache.get('houdini'));
+
+//2
+setTimeout(() => {
+    console.log('Houdini is ' + cache.get('houdini'));
+}, 500);
 
 app.listen(PORT, () => {
     process.env.PORT ? console.log("in production") : console.log("in development");
