@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(morgan('tiny'));
 app.use(express.static('static'));
@@ -12,7 +12,7 @@ const amigo = require('./server/amigo/amigo.route');
 const grupo = require('./server/grupo/grupo.route');
 
 
-app.get('/', (req, res) => res.send('Página Inicial'))
+app.get('/', (req, res) => res.send('Página Inicial'));
 
 
 /**
@@ -31,6 +31,9 @@ app.use('/amigo', amigo);
 app.use('/grupo', grupo);
 
 
-app.listen(PORT, () => console.log('Example app listening on port 3000!'));
+app.listen(PORT, () => {
+    process.env.PORT ? console.log("in production") : console.log("in development");
+    console.log(`Server is listening on port ${PORT}`);
+});
 
 module.exports = app;
