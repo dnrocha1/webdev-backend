@@ -27,17 +27,13 @@ exports.get = (req, res, next) => {
 };
 
 exports.post = (req, res) => {
-    //res.send('Cadastra uma nova conta');
-    const conta = new Conta({
-        id: 1,
-        descricao: "Conta de Energia",
-        valor: 100,
-        grupo: "Galera do Lab",
-        categoria: "Casa"
-    });
+    console.log(req.body);
+    res.send(req.body);
+
+    const conta = new Conta(req.body);
     conta.save((err,conta) => {
         if(err) return console.error(err);
         console.log('CONTA SALVA');
     });
-    res.send("SALVO NO BANCO");
+    //res.send("SALVO NO BANCO");
 };
