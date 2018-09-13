@@ -3,6 +3,7 @@ const db = mongoose.connection;
 
 function connect () {
 
+    mongoose.Promise = Promise;  
     mongoose.connect('mongodb://localhost/manager', { useNewUrlParser: true });
 
     db.on('error', console.error.bind(console, 'conection error:'));

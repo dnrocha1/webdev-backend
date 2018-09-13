@@ -23,26 +23,23 @@
 const Conta = require('./conta.model');
 
 function getConta(req, res) {
-    Conta.find((err, contas) => {
-        if(err) res.send(err);
-        res.json(contas);
-    });
+    Conta.find()
+        .then(contas => res.json(contas))
+        .catch(err => res.send(err));
 }
 
 function getContaById(req, res) {
-    Conta.findById(req.params.idConta, (err, conta) => {
-        if(err) res.send(err);
-        res.json(conta);
-    });
+    Conta.findById(req.params.idConta)
+        .then(conta => res.json(conta))
+        .catch(err => res.send(err));
 }
 
 function novaConta(req, res) {
     const conta = new Conta(req.body);
 
-    conta.save((err) => {
-        if(err) res.send(err);
-        res.send(conta);
-    });
+    conta.save()
+        .then(() => {res.send(conta)})
+        .catch(err => res.send(err));
 }
 
 module.exports = {getConta, getContaById, novaConta};

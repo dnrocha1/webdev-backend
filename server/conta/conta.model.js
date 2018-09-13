@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const ContaSchema = new mongoose.Schema({
-    id: String,
     descricao: String,
     valor: Number,
     data: Date,
