@@ -3,7 +3,24 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const dbConfig = require('./config/db.config')();
+const dbConfig = require('./config/db.config');
+dbConfig();
+
+const swaggerJSDoc = require('swagger-jsdoc');
+const options = {
+    definition: {
+        info: {
+            title: 'Hello World',
+            version: '1.0.0',
+        },
+    },
+    apis: ['./index.js'],
+};
+const swaggerSpec = swaggerJSDoc(options);
+app.get('/docs', function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
+});
 
 const PORT = process.env.PORT || 3000;
 
@@ -20,6 +37,17 @@ const conta = require('./server/conta/conta.route');
 const amigo = require('./server/amigo/amigo.route');
 const grupo = require('./server/grupo/grupo.route');
 
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     description: Faz isso
+ *     produces:
+ *       - application/json
+ *   responses:
+ *     200:
+ *       description: home
+ */
 app.get('/', (req, res) => res.send('Página Inicial'));
 
 app.use('/conta', conta);
