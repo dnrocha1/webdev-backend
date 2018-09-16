@@ -10,7 +10,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const options = {
     definition: {
         info: {
-            title: 'Hello World',
+            title: 'Minha aplicação',
             version: '1.0.0',
         },
     },
@@ -21,6 +21,17 @@ app.get('/docs', function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
 });
+
+const swaggerUi = require('swagger-ui-express');
+//const swaggerDocument = require('./swagger.json');
+ 
+//router.use('/', swaggerUi.serve);
+//router.get('/', swaggerUi.setup(swaggerDocument));
+const swaggerOptions = {  
+    customSiteTitle: 'Swagger Documentation',  
+    customCss: '.topbar { }',  
+}
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerOptions));
 
 const PORT = process.env.PORT || 3000;
 
@@ -41,12 +52,12 @@ const grupo = require('./server/grupo/grupo.route');
  * @swagger
  * /:
  *   get:
- *     description: Faz isso
+ *     description: Faz isso, mas eu posso mudar isso
  *     produces:
  *       - application/json
  *   responses:
  *     200:
- *       description: home
+ *       description: VAI TOMAR NO SEU CU
  */
 app.get('/', (req, res) => res.send('Página Inicial'));
 
