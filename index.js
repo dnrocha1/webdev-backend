@@ -14,7 +14,7 @@ const options = {
             version: '1.0.0',
         },
     },
-    apis: ['./index.js'],
+    apis: ['./index.js', './server/**/*.js'],
 };
 const swaggerSpec = swaggerJSDoc(options);
 app.get('/docs', function(req, res) {
@@ -52,12 +52,12 @@ const grupo = require('./server/grupo/grupo.route');
  * @swagger
  * /:
  *   get:
- *     description: Faz isso, mas eu posso mudar isso
+ *     description: Página inicial da aplicação
  *     produces:
  *       - application/json
- *   responses:
- *     200:
- *       description: VAI TOMAR NO SEU CU
+ *     responses:
+ *       200:
+ *         description: homepage
  */
 app.get('/', (req, res) => res.send('Página Inicial'));
 
