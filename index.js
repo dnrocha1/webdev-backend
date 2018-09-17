@@ -3,7 +3,17 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const dbConfig = require('./config/db.config')();
+const dbConfig = require('./config/db.config');
+dbConfig();
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerConfig = require('./config/swagger.config');
+
+app.use('/docs', swaggerUi.serve);
+app.get('/docs', swaggerUi.setup(
+    swaggerConfig.swaggerSpec, 
+    swaggerConfig.swaggerUIOptions
+));
 
 const PORT = process.env.PORT || 3000;
 
@@ -20,6 +30,17 @@ const conta = require('./server/conta/conta.route');
 const amigo = require('./server/amigo/amigo.route');
 const grupo = require('./server/grupo/grupo.route');
 
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     description: Página inicial da aplicação
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ */
 app.get('/', (req, res) => res.send('Página Inicial'));
 
 app.use('/conta', conta);
