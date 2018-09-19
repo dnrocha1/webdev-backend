@@ -15,7 +15,7 @@ function getUserById(req, res) {
 function newUser(req, res) {
     const user = new User(req.body);
     user.save()
-        .then(() => {res.send(user)})
+        .then(() => {res.json(user)})
         .catch(err => res.send(err));
 }
 

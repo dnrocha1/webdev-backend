@@ -26,10 +26,9 @@ app.use(function (req, res, next) {
 
 app.use(morgan('tiny'));
 
-//const conta = require('./server/conta/conta.route');
-//const amigo = require('./server/amigo/amigo.route');
 const user = require('./server/user/user.route');
-const grupo = require('./server/grupo/grupo.route');
+const group = require('./server/group/group.route');
+const member = require('./server/member/member.route')
 
 /**
  * @swagger
@@ -44,10 +43,9 @@ const grupo = require('./server/grupo/grupo.route');
  */
 app.get('/', (req, res) => res.json('Página Inicial'));
 
-//app.use('/conta', conta);
-//app.use('/amigo', amigo);
 app.use('/user', user);
-app.use('/grupo', grupo);
+app.use('/group', group);
+app.use('/member', member);
 
 
 app.listen(PORT, () => {
