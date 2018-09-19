@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../index');
-
+/* 
 request(app)
     .get('/amigo')
     .expect(200)
@@ -21,3 +21,4 @@ request(app)
     .end((err, res) => {
         if (err) throw err;
     });
+     */

@@ -26,8 +26,9 @@ app.use(function (req, res, next) {
 
 app.use(morgan('tiny'));
 
-const conta = require('./server/conta/conta.route');
-const amigo = require('./server/amigo/amigo.route');
+//const conta = require('./server/conta/conta.route');
+//const amigo = require('./server/amigo/amigo.route');
+const user = require('./server/user/user.route');
 const grupo = require('./server/grupo/grupo.route');
 
 /**
@@ -41,10 +42,11 @@ const grupo = require('./server/grupo/grupo.route');
  *       200:
  *         description: homepage
  */
-app.get('/', (req, res) => res.send('Página Inicial'));
+app.get('/', (req, res) => res.json('Página Inicial'));
 
-app.use('/conta', conta);
-app.use('/amigo', amigo);
+//app.use('/conta', conta);
+//app.use('/amigo', amigo);
+app.use('/user', user);
 app.use('/grupo', grupo);
 
 

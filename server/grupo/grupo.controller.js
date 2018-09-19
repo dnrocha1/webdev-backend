@@ -11,7 +11,7 @@ const grupo_exemplo = {
 
 exports.get = (req, res, next) => {
     const response = req.params.id ? grupo_exemplo : 'retorna todos os grupos';
-    res.status(200).send(response);
+    res.status(200).json(response);
 };
 
 exports.post = (req, res) => {

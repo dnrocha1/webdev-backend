@@ -5,6 +5,7 @@ function connect () {
 
     mongoose.Promise = Promise;  
     mongoose.connect('mongodb://localhost/manager', { useNewUrlParser: true });
+    mongoose.set('useCreateIndex', true);
 
     db.on('error', console.error.bind(console, 'conection error:'));
     db.once('open', () => {
