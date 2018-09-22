@@ -8,7 +8,7 @@ function getUsers(req, res) {
 
 function getUserById(req, res) {
     User.findById(req.params.idUser)
-        .then(user => json(user))
+        .then(user => res.json(user))
         .catch(err => res.send(err));
 }
 
