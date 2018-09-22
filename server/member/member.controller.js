@@ -6,7 +6,7 @@ function getMembers(req, res) {
         .catch(err => res.send(err));
 }
 
-function getMembersById(req, res) {
+function getMemberById(req, res) {
     Member.findById(req.params.idMember)
         .then(member => res.json(member))
         .catch(err => res.send(err));
@@ -19,4 +19,4 @@ function newMember(req, res) {
         .catch(err => res.send(err));
 }
 
-module.exports = {getMembers, getMembersById, newMember};
+module.exports = {getMembers, getMemberById, newMember};
