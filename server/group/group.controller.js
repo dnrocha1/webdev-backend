@@ -12,21 +12,21 @@ const Group = require('./group.model');
 
 function getGroups(req, res) {
     Group.find()
-        .then(groups => res.json(groups))
-        .catch(err => res.send(err));
+        .catch(err => res.json(err))
+        .then(groups => res.json(groups));
 }
 
 function getGroupById(req, res) {
     Group.findById(req.params.idGroup)
-        .then(group => res.json(group))
-        .catch(err => res.send(err));
+        .catch(err => res.json(err))
+        .then(group => res.json(group));
 }
 
 function newGroup(req, res) {
     const group = new Group(req.body);
     group.save()
-        .then(() => {res.json(group)})
-        .catch(err => res.send(err));
+        .catch(err => res.json(err))
+        .then(() => {res.json(group)});
 }
 
 module.exports = {getGroups, getGroupById, newGroup};

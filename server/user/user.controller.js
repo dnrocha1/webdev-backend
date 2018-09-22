@@ -2,21 +2,21 @@ const User = require('./user.model');
 
 function getUsers(req, res) {
     User.find()
-        .then(users => res.json(users))
-        .catch(err => res.send(err));
+        .catch(err => res.json(err))
+        .then(users => res.json(users));
 }
 
 function getUserById(req, res) {
     User.findById(req.params.idUser)
-        .then(user => res.json(user))
-        .catch(err => res.send(err));
+        .catch(err => res.json(err))
+        .then(user => res.json(user));
 }
 
 function newUser(req, res) {
     const user = new User(req.body);
     user.save()
-        .then(() => {res.json(user)})
-        .catch(err => res.send(err));
+        .catch(err => res.json(err))
+        .then(() => {res.json(user)});
 }
 
 module.exports = {getUsers, getUserById, newUser};
