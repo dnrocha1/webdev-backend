@@ -8,6 +8,6 @@ router.route('/')
     .post(controller.newMember);
 
 router.route('/:idMember')
-    .get(controller.getMembersById);
+    .get(controller.getMemberById);
 
 module.exports = router;

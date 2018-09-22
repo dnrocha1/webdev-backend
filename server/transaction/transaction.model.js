@@ -45,4 +45,4 @@ const TransactionSchema = new mongoose.Schema({
 });
 //inicialmente vai ter só uma categoria, que será unica
 
-module.exports = mongoose.model('Member', TransactionSchema);
+module.exports = mongoose.model('Transaction', TransactionSchema);
