@@ -2,21 +2,27 @@ const User = require('./user.model');
 
 function getUsers(req, res) {
     User.find()
-        .catch(err => res.json(err))
-        .then(users => res.json(users));
+        .then(users => res.json(users))
+        .catch(err => res.json(err));
 }
 
 function getUserById(req, res) {
     User.findById(req.params.idUser)
-        .catch(err => res.json(err))
-        .then(user => res.json(user));
+        .then(user => res.json(user))
+        .catch(err => res.json(err));
 }
 
 function newUser(req, res) {
     const user = new User(req.body);
     user.save()
-        .catch(err => res.json(err))
-        .then(() => {res.json(user)});
+        .then(() => res.json(user))
+        .catch(err => res.json(err));
 }
 
-module.exports = {getUsers, getUserById, newUser};
+function updateUser(req, res) {
+    User.findOneAndUpdate({_id: req.params.idUser}, req.body)
+        .then((user) => res.json(user))
+        .catch((err) => res.json(err));
+}
+
+module.exports = {getUsers, getUserById, newUser, updateUser};

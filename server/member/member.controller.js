@@ -2,21 +2,21 @@ const Member = require('./member.model');
 
 function getMembers(req, res) {
     Member.find()
-        .catch(err => res.json(err))
-        .then(members => res.json(members));
+        .then(members => res.json(members))
+        .catch(err => res.json(err));
 }
 
 function getMemberById(req, res) {
     Member.findById(req.params.idMember)
-        .catch(err => res.json(err))
-        .then(member => res.json(member));
+        .then(member => res.json(member))
+        .catch(err => res.json(err));
 }
 
 function newMember(req, res) {
     const member = new Member(req.body);
     member.save()
-        .catch(err => res.json(err))
-        .then(() => {res.json(member)});
+        .then(() => res.json(member))
+        .catch(err => res.json(err));
 }
 
 module.exports = {getMembers, getMemberById, newMember};

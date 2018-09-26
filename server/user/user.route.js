@@ -8,6 +8,7 @@ router.route('/')
     .post(controller.newUser);
 
 router.route('/:idUser')
-    .get(controller.getUserById);
+    .get(controller.getUserById)
+    .put(controller.updateUser);
 
 module.exports = router;
