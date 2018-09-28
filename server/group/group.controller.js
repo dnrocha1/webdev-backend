@@ -29,4 +29,16 @@ function newGroup(req, res) {
         .catch(err => res.json(err));
 }
 
-module.exports = {getGroups, getGroupById, newGroup};
+function updateGroup(req, res) {
+    Group.findOneAndUpdate({_id: req.params.idGroup}, req.body, {new: true})
+        .then((group) => res.json(group))
+        .catch((err) => res.json(err));
+}
+
+function removeGroup(req, res) {
+    Group.findOneAndDelete({_id: req.params.idGroup}, {rawResult: true})
+        .then((group) => res.json(group.value))
+        .catch((err) => res.json(err));
+}
+
+module.exports = {getGroups, getGroupById, newGroup, updateGroup, removeGroup};

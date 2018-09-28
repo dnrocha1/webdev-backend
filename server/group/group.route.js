@@ -8,6 +8,8 @@ router.route('/')
     .post(controller.newGroup);
 
 router.route('/:idGroup')
-    .get(controller.getGroupById);
+    .get(controller.getGroupById)
+    .put(controller.updateGroup)
+    .delete(controller.removeGroup);
 
 module.exports = router;

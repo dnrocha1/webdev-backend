@@ -20,9 +20,15 @@ function newUser(req, res) {
 }
 
 function updateUser(req, res) {
-    User.findOneAndUpdate({_id: req.params.idUser}, req.body)
+    User.findOneAndUpdate({_id: req.params.idUser}, req.body, {new: true})
         .then((user) => res.json(user))
         .catch((err) => res.json(err));
 }
 
-module.exports = {getUsers, getUserById, newUser, updateUser};
+function removeUser(req, res) {
+    User.findOneAndDelete({_id: req.params.idUser}, {rawResult: true})
+        .then((user) => res.json(user.value))
+        .catch((err) => res.json(err));
+}
+
+module.exports = {getUsers, getUserById, newUser, updateUser, removeUser};
