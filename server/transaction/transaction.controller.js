@@ -19,4 +19,16 @@ function newTransaction(req, res) {
         .catch(err => res.json(err));
 }
 
-module.exports = {getTransactions, getTransactionById, newTransaction};
+function updateTransaction(req, res) {
+    Transaction.findOneAndUpdate({_id: req.params.idTransaction}, req.body, {new: true})
+        .then((transaction) => res.json(transaction))
+        .catch((err) => res.json(err));
+}
+
+function removeTransaction(req, res) {
+    Transaction.findOneAndDelete({_id: req.params.idTransaction}, {rawResult: true})
+        .then((transaction) => res.json(transaction.value))
+        .catch((err) => res.json(err));
+}
+
+module.exports = {getTransactions, getTransactionById, newTransaction, updateTransaction, removeTransaction};

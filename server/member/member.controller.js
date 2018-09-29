@@ -19,4 +19,16 @@ function newMember(req, res) {
         .catch(err => res.json(err));
 }
 
-module.exports = {getMembers, getMemberById, newMember};
+function updateMember(req, res) {
+    Member.findOneAndUpdate({_id: req.params.idMember}, req.body, {new: true})
+        .then((member) => res.json(member))
+        .catch((err) => res.json(err));
+}
+
+function removeMember(req, res) {
+    Member.findOneAndDelete({_id: req.params.idMember}, {rawResult: true})
+        .then((member) => res.json(member.value))
+        .catch((err) => res.json(err));
+}
+
+module.exports = {getMembers, getMemberById, newMember, updateMember, removeMember};

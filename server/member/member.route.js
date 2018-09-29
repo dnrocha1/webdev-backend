@@ -8,6 +8,8 @@ router.route('/')
     .post(controller.newMember);
 
 router.route('/:idMember')
-    .get(controller.getMemberById);
+    .get(controller.getMemberById)
+    .put(controller.updateMember)
+    .delete(controller.removeMember);
 
 module.exports = router;
