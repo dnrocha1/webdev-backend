@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const dbConfig = require('./config/db.config');
 dbConfig();
@@ -25,6 +26,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(morgan('tiny'));
+app.use(cors());
 
 const user = require('./server/user/user.route');
 const group = require('./server/group/group.route');
