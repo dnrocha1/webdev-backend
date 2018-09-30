@@ -12,10 +12,12 @@ const MemberSchema = new mongoose.Schema({
         unique: true
     },
     admin: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     member_confirmation: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     //aproved_by_admin?
 });
