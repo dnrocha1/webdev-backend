@@ -16,10 +16,11 @@ const login = (req, res, next) => {
                 const token = jwt.sign({
                     _id: user._id,
                     username: user.username,
-                    email: user.email
+                    email: user.email,
+                    //role: ADMIN
                 },  config.jwtSecret);
 
-                return res.json({token, userId: user._id});
+                return res.json({userId: user._id, token});
 
             } else {
                 const err = {'message':'SENHA INCORRETA'};
