@@ -1,5 +1,5 @@
 const moongoose = require('mongoose');
-const bcrpyt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 
 const UserSchema = new moongoose.Schema({
     name: {
@@ -23,21 +23,23 @@ const UserSchema = new moongoose.Schema({
     }]
 });
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
     const user = this;
-    if (!user.isModified('password')) return next();
-
-    bcrpyt.genSalt(10, function(err, salt) {
-        if (err) return next(err);
-
-        bcrpyt.hash(user.password, salt, function(err, hash) {
-            if (err) return next(err);
-
+    if (!user.isModified('password')) {
+        return next();
+    }
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(user.password, salt, null, (errr, hash) => {
             user.password = hash;
             next();
         });
     });
-
 });
-
+  
+UserSchema.method({
+    comparePassword (reqPassword, userPassword) {
+        return bcrypt.compareSync(reqPassword, userPassword)
+    }
+});
+  
 module.exports = moongoose.model('User', UserSchema);

@@ -12,7 +12,7 @@ const login = (req, res, next) => {
 
     userCtrl.getUserByEmail(userEmail)
         .then((user) => {
-            if(user && userEmail === user.email) {
+            if(user && userEmail === user.email && user.comparePassword(userPassword, user.password)) {
                 const token = jwt.sign({
                     _id: user._id,
                     username: user.username,
@@ -22,7 +22,7 @@ const login = (req, res, next) => {
                 return res.json({token, userId: user._id});
 
             } else {
-                const err = {'message':'JWT ERROR'};
+                const err = {'message':'SENHA INCORRETA'};
                 return res.json(err);
                 //return next(err);
             }
