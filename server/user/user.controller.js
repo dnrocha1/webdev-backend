@@ -12,6 +12,10 @@ function getUserById(req, res) {
         .catch(err => res.json(err));
 }
 
+function getUserByEmail(userEmail) {
+    return User.findOne({'email': userEmail});
+}
+
 function newUser(req, res) {
     const user = new User(req.body);
     user.save()
@@ -31,4 +35,4 @@ function removeUser(req, res) {
         .catch((err) => res.json(err));
 }
 
-module.exports = {getUsers, getUserById, newUser, updateUser, removeUser};
+module.exports = {getUsers, getUserById, getUserByEmail, newUser, updateUser, removeUser};
