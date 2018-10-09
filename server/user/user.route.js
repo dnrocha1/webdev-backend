@@ -9,8 +9,8 @@ router.route('/')
     .post(controller.newUser);
 
 router.route('/:idUser')
-    .get(controller.getUserById)
-    .put(controller.updateUser)
-    .delete(controller.removeUser);
+    .get(auth.authenticate, controller.getUserById)
+    .put(auth.authenticate, auth.authById, controller.updateUser)
+    .delete(auth.authenticate, controller.removeUser);
 
 module.exports = router;

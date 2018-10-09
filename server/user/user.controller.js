@@ -29,10 +29,17 @@ function updateUser(req, res) {
         .catch((err) => res.json(err));
 }
 
+function newFavUser(req, res) {
+    const favUsers = req.body.favUsers;
+    User.findOneAndUpdate({_id: req.params.idUser}, {$addToSet: favUsers}, {new: true})
+        .then((user) => res.json(user))
+        .catch((err) => res.json(err));
+}
+
 function removeUser(req, res) {
     User.findOneAndDelete({_id: req.params.idUser}, {rawResult: true})
         .then((user) => res.json(user.value))
         .catch((err) => res.json(err));
 }
 
-module.exports = {getUsers, getUserById, getUserByEmail, newUser, updateUser, removeUser};
+module.exports = {getUsers, getUserById, getUserByEmail, newUser, newFavUser, updateUser, removeUser};

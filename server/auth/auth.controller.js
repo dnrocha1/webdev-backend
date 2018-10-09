@@ -34,8 +34,6 @@ const login = (req, res, next) => {
 }
 
 const authenticate = (req, res, next) => {
-    console.log(req.headers['authorization'])
-    //const token = req.body.token; //|| req.headers['authorization'].split(" ")[1];
     let token = undefined;
     if (req.headers['authorization']) {
         token = req.headers['authorization'].split(" ")[1];
@@ -46,6 +44,7 @@ const authenticate = (req, res, next) => {
         try {
             const data = (decodeToken(token));
             if(data) {
+                req._id = data._id;
                 req.email = data.email;
                 next();
             } else {
@@ -60,8 +59,22 @@ const authenticate = (req, res, next) => {
     }
 }
 
+const authById = (req, res, next) => {
+    const userId = req._id;
+    if (userId) {
+        const reqId = req.params.idUser;
+        if (userId === reqId) {
+            next();
+        } else {
+            return res.json({ 'message':'Failed. Unauthorized user.' });
+        }
+    } else {
+        return res.json({ 'message':'Something went wrong, try again.' });
+    }
+}
+
 const decodeToken = (token) => {
     return jwt.verify(token, config.jwtSecret);
 }
 
-module.exports = {login, authenticate};
+module.exports = {login, authenticate, authById};

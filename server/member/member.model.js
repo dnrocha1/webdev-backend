@@ -11,9 +11,11 @@ const MemberSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    admin: {
-        type: Boolean,
-        default: false
+    role: {
+        type: String,
+        //required: true,
+        enum: ["ADMIN", "USER"],
+        default: "USER"
     },
     member_confirmation: {
         type: Boolean,
