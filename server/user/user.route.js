@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../auth/auth.controller');
 
 const controller = require('./user.controller');
 
 router.route('/')
-    .get(controller.getUsers)
+    .get(auth.authenticate, controller.getUsers)
     .post(controller.newUser);
 
 router.route('/:idUser')
