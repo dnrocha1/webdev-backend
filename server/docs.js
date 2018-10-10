@@ -121,7 +121,7 @@
  *       200:
  *         description: homepage
  * 
-  * /group/{userId}:
+ * /group/{groupId}:
  *   get:
  *     tags:
  *     - "group"
@@ -142,11 +142,119 @@
  *     responses:
  *       200:
  *         description: homepage
-  *   delete:
+ *   delete:
  *     tags:
  *     - "group"
  *     summary: "Deleta o grupo pelo Id"
  *     description: Retorna o objeto do tipo Grupo que foi deletado, de acordo com o parametro na requisição
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ * 
+ * /member:
+ *   get:
+ *     tags:
+ *     - "member"
+ *     summary: "Retorna todos os membros"
+ *     description: Retorna uma lista com todos os membros cadastrados
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ *   post:
+ *     tags:
+ *     - "member"
+ *     summary: "Cadastra um membro"
+ *     description: Cadastra um novo membro no sistema e retorna o membro cadastrado
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ * 
+ * /member/{memberId}:
+ *   get:
+ *     tags:
+ *     - "member"
+ *     summary: "Retorna membro pelo Id"
+ *     description: Retorna o objeto do tipo Membro que foi encontrado, de acordo com o parametro na requisição
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ *   put:
+ *     tags:
+ *     - "member"
+ *     summary: "Atualiza o membro pelo Id"
+ *     description: Retorna o objeto do tipo Membro que foi atualizado, de acordo com o parametro na requisição
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ *   delete:
+ *     tags:
+ *     - "member"
+ *     summary: "Deleta o membro pelo Id"
+ *     description: Retorna o objeto do tipo Membro que foi deletado, de acordo com o parametro na requisição
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ * 
+ * /transaction:
+ *   get:
+ *     tags:
+ *     - "transaction"
+ *     summary: "Retorna todos as transações"
+ *     description: Retorna uma lista com todos as transações cadastradas
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ *   post:
+ *     tags:
+ *     - "transaction"
+ *     summary: "Cadastra uma transação"
+ *     description: Cadastra uma nova transação no sistema e retorna o transação cadastrada
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ * 
+ * /transaction/{transactionId}:
+ *   get:
+ *     tags:
+ *     - "transaction"
+ *     summary: "Retorna transação pelo Id"
+ *     description: Retorna o objeto do tipo Transação que foi encontrado, de acordo com o parametro na requisição
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ *   put:
+ *     tags:
+ *     - "transaction"
+ *     summary: "Atualiza transação pelo Id"
+ *     description: Retorna o objeto do tipo Transação que foi atualizado, de acordo com o parametro na requisição
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: homepage
+ *   delete:
+ *     tags:
+ *     - "transaction"
+ *     summary: "Deleta transação pelo Id"
+ *     description: Retorna o objeto do tipo Transação que foi deletado, de acordo com o parametro na requisição
  *     produces:
  *       - application/json
  *     responses:
