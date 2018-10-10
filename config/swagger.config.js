@@ -3,7 +3,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const JSDocOptions = {
     definition: {
         info: {
-            title: 'Minha aplicação',
+            title: 'Documentação do backend',
             version: '1.0.0',
         },
     },

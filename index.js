@@ -39,17 +39,6 @@ const transaction = require('./server/transaction/transaction.route');
 const auth = require('./server/auth/auth.route');
 //const transaction = require('./server/transaction/transaction.route');
 
-/**
- * @swagger
- * /:
- *   get:
- *     description: Página inicial da aplicação
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: homepage
- */
 app.get('/', (req, res) => res.json('Página Inicial'));
 
 app.use('/user', user);
