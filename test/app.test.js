@@ -52,13 +52,19 @@ describe('USER', async () => {
             .send(user2)
             .then((res) => {
                 request
-                .get('/user')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('array');
-                    res.body.length.should.be.eql(1);
-                    done();
+                .post('/user')
+                .send(user3)
+                .then((res) => {
+                    request
+                    .get('/user')
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.be.a('array');
+                        res.body.length.should.be.eql(2);
+                        done();
+                    });
                 });
+                
             });
         });
     });
