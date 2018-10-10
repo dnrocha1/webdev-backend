@@ -6,7 +6,8 @@ const controller = require('./user.controller');
 
 router.route('/')
     .get(auth.authenticate, controller.getUsers)
-    .post(controller.newUser);
+    .post(controller.newUser)
+    .delete(controller.removeAll);
 
 router.route('/:idUser')
     .get(auth.authenticate, controller.getUserById)
