@@ -2,7 +2,10 @@ const User = require('./user.model');
 
 function getUsers(req, res) {
     User.find()
-        .then(users => res.json(users))
+        .then(users => {
+            if (users.length === 0) return res.status(404).json({'message':'Users not found'});
+            return res.json(users);
+        })
         .catch(err => res.json(err));
 }
 
@@ -20,7 +23,7 @@ function newUser(req, res) {
     const user = new User(req.body);
     user.save()
         .then(() => res.json(user))
-        .catch(err => res.json(err));
+        .catch(err => res.status(400).json(err));
 }
 
 function updateUser(req, res) {
@@ -42,4 +45,13 @@ function removeUser(req, res) {
         .catch((err) => res.json(err));
 }
 
-module.exports = {getUsers, getUserById, getUserByEmail, newUser, newFavUser, updateUser, removeUser};
+function removeAll(req, res) {
+    User.deleteMany({})
+        .then(() => res.json({'message':'Removed all users.'}))
+        .catch((err) => {
+            console.log(err);
+            return res.json({'message': err.message})
+        });
+}
+
+module.exports = {getUsers, getUserById, getUserByEmail, newUser, newFavUser, updateUser, removeUser, removeAll};

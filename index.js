@@ -4,6 +4,9 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const dbConfig = require('./config/db.config');
 dbConfig();
 
@@ -57,8 +60,8 @@ app.use('transaction', transaction);
 app.use('/auth', auth);
 
 app.listen(PORT, () => {
-    process.env.PORT ? console.log("in production") : console.log("in development");
-    console.log(`Server is listening on port ${PORT}`);
+    //process.env.PORT ? console.log("in production") : console.log("in development");
+    console.log(`Server is listening on port ${PORT}\n`);
 });
 
 module.exports = app;
