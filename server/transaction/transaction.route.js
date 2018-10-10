@@ -4,12 +4,12 @@ const router = express.Router();
 const controller = require('./transaction.controller');
 
 router.route('/')
-    .get(controller.getTransactions)
-    .post(controller.newTransaction);
+    .get(auth.authenticate, controller.getTransactions)
+    .post(auth.authenticate, controller.newTransaction);
 
 router.route('/:idTransaction')
-    .get(controller.getTransactionById)
-    .put(controller.updateTransaction)
-    .delete(controller.removeTransaction);
+    .get(auth.authenticate, controller.getTransactionById)
+    .put(auth.authenticate, controller.updateTransaction)
+    .delete(auth.authenticate, controller.removeTransaction);
 
 module.exports = router;
