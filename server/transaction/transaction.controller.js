@@ -2,6 +2,11 @@ const Transaction = require('./transaction.model');
 
 function getTransactions(req, res) {
     Transaction.find()
+        .populate('createdBy')
+        .populate('indebted')
+        .populate('payer')
+        .populate('belongingGroup')
+        .exec()
         .then(transactions => res.json(transactions))
         .catch(err => res.json(err));
 }
