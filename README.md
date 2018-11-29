@@ -1,4 +1,4 @@
-# webdev-backend
+# Easy Expense
 Repositório para a lógica da aplicação do projeto da disciplina de Princípios de Desenvolvimento Web
 
 - O projeto consiste em gerenciador de contas/despesas feitas por grupos. 
