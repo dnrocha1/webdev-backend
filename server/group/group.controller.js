@@ -41,4 +41,8 @@ function removeGroup(req, res) {
         .catch((err) => res.json(err));
 }
 
-module.exports = {getGroups, getGroupById, newGroup, updateGroup, removeGroup};
+function addMember(member) {
+    return Group.findOneAndUpdate({_id: member.group}, {$addToSet: {members: member}}, {new: true});
+}
+
+module.exports = {getGroups, getGroupById, newGroup, updateGroup, removeGroup, addMember};

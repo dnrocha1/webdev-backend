@@ -54,4 +54,8 @@ function removeAll(req, res) {
         });
 }
 
-module.exports = {getUsers, getUserById, getUserByEmail, newUser, newFavUser, updateUser, removeUser, removeAll};
+function addMember(member) {
+    return User.findOneAndUpdate({_id: member.user}, {$addToSet: {members: member}}, {new: true});
+}
+
+module.exports = {getUsers, getUserById, getUserByEmail, newUser, newFavUser, updateUser, removeUser, removeAll, addMember};

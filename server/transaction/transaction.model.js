@@ -4,14 +4,12 @@ const TransactionSchema = new mongoose.Schema({
     amount: {
         type: Number,
         required: true,
-        set: num => { Math.round(num * 100) / 100 }
     },
     description: {
         type: String
     },
     category: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Category',
-        unique: true
+        type: mongoose.Schema.Types.ObjectId, ref: 'Category'
     },
     date: {
         type: Date, default: Date.now

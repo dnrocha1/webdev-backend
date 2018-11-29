@@ -44,7 +44,7 @@ app.get('/', (req, res) => res.json('Página Inicial'));
 app.use('/user', user);
 app.use('/group', group);
 app.use('/member', member);
-app.use('transaction', transaction);
+app.use('/transaction', transaction);
 
 app.use('/auth', auth);
 

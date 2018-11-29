@@ -1,4 +1,6 @@
 const Member = require('./member.model');
+const userController = require('../user/user.controller');
+const groupController = require('../group/group.controller');
 
 function getMembers(req, res) {
     Member.find()
@@ -15,7 +17,9 @@ function getMemberById(req, res) {
 function newMember(req, res) {
     const member = new Member(req.body);
     member.save()
-        .then(() => res.json(member))
+        .then(() => {
+            Promise.all([ userController.addMember(member), groupController.addMember(member) ]).then(() => res.json(member));
+        })
         .catch(err => res.json(err));
 }
 

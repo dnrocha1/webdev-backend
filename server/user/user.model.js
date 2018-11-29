@@ -15,8 +15,8 @@ const UserSchema = new moongoose.Schema({
         type: String,
         required: true
     },
-    groups: [{
-        type: moongoose.Schema.Types.ObjectId, ref: 'Group'
+    members: [{
+        type: moongoose.Schema.Types.ObjectId, ref: 'Members'
     }],
     favUsers: [{
         type: moongoose.Schema.Types.ObjectId, ref: 'User'
