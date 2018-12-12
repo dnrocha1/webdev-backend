@@ -15,12 +15,12 @@ const UserSchema = new moongoose.Schema({
         type: String,
         required: true
     },
-    members: [{
-        type: moongoose.Schema.Types.ObjectId, ref: 'Members'
-    }],
-    favUsers: [{
-        type: moongoose.Schema.Types.ObjectId, ref: 'User'
+    transactions: [{
+        type: moongoose.Schema.Types.ObjectId, ref: 'Transaction'
     }]
+    /*friends: [{
+        type: moongoose.Schema.Types.ObjectId, ref: 'User'
+    }],*/
 });
 
 UserSchema.pre('save', function (next) {

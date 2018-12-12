@@ -1,11 +1,10 @@
 const Transaction = require('./transaction.model');
+const userController = require('../user/user.controller');
 
 function getTransactions(req, res) {
     Transaction.find()
-        .populate('createdBy')
-        .populate('indebted')
-        .populate('payer')
-        .populate('belongingGroup')
+        .populate('paidByUser')
+        .populate('transactionMembers.user')
         .exec()
         .then(transactions => res.json(transactions))
         .catch(err => res.json(err));
@@ -19,8 +18,15 @@ function getTransactionById(req, res) {
 
 function newTransaction(req, res) {
     const transaction = new Transaction(req.body);
+    
+    let users = transaction.transactionMembers.map((member) => member.user._id);
+    users.push(transaction.paidByUser);
+
     transaction.save()
-        .then(() => res.json(transaction))
+        .then(() => {
+            Promise.all(users.map(user => userController.addTransaction(transaction, user)))
+            .then(() => res.json(transaction))
+        })
         .catch(err => res.json(err));
 }
 
