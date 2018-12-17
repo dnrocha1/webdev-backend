@@ -3,7 +3,7 @@ const environment = process.env.NODE_ENV;
 const db = mongoose.connection;
 
 function connect () {
-    const mongoUrl = environment === 'development' ? 'mongodb://localhost/manager' : 'mongodb://localhost/test'
+    const mongoUrl = environment === 'development' ? 'mongodb://localhost/manager' : 'mongodb://localhost/test_simple'
 
     mongoose.Promise = Promise;  
     mongoose.connect(mongoUrl, { useNewUrlParser: true });

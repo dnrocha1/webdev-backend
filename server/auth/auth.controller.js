@@ -12,7 +12,7 @@ const login = (req, res, next) => {
         .then((user) => {
 
             if(!user) {
-                return res.json({ 'message':'Failed. User not found.' });
+                return res.status(401).json({ 'message':'Failed. User not found.' });
             } else if(user) {
                 if(userEmail === user.email && user.comparePassword(userPassword, user.password)) {
                     const token = jwt.sign({
@@ -20,16 +20,16 @@ const login = (req, res, next) => {
                         email: user.email,
                         //role: ADMIN
                     },  config.jwtSecret);
-                    return res.json({ userId: user._id, token });
+                    return res.status(200).json({ userId: user._id, token });
                 } else {
-                    return res.json({ 'message':'Failed. Wrong password.' });
+                    return res.status(401).json({ 'message':'Failed. Wrong password.' });
                 }
             }
         })
         .catch((err) => {
             console.log(err);
             const error = {' message':'Something went wrong, try again. ', 'error': err.message };
-            return res.json(error);
+            return res.status(401).json(error);
         });
 }
 
