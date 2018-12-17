@@ -3,7 +3,7 @@ const userController = require('../user/user.controller');
 
 function getTransactions(req, res) {
     Transaction.find()
-        .populate('paidByUser')
+        //.populate('paidByUser')
         .populate('transactionMembers.user')
         .exec()
         .then(transactions => res.json(transactions))
@@ -19,12 +19,16 @@ function getTransactionById(req, res) {
 function newTransaction(req, res) {
     const transaction = new Transaction(req.body);
     
-    let users = transaction.transactionMembers.map((member) => member.user._id);
-    users.push(transaction.paidByUser);
+    let usersDebtor = transaction.transactionMembers.map((member) => member.user._id);
+    //users.push(transaction.paidByUser);
 
     transaction.save()
         .then(() => {
-            Promise.all(users.map(user => userController.addTransaction(transaction, user)))
+            //Promise.all(users.map(user => userController.addTransaction(transaction, user)))
+            Promise.all([
+               ...usersDebtor.map(user => userController.addTransactionDebt(transaction, user)),
+                userController.addTransactionReceiving(transaction, transaction.paidByUser)
+            ])
             .then(() => res.json(transaction))
         })
         .catch(err => res.json(err));

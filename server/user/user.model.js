@@ -15,9 +15,12 @@ const UserSchema = new moongoose.Schema({
         type: String,
         required: true
     },
-    transactions: [{
+    debt: [{ 
+        type: moongoose.Schema.Types.ObjectId, ref: 'Transaction' 
+    }],
+    receiving: [{ 
         type: moongoose.Schema.Types.ObjectId, ref: 'Transaction'
-    }]
+     }]
     /*friends: [{
         type: moongoose.Schema.Types.ObjectId, ref: 'User'
     }],*/

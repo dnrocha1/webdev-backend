@@ -2,7 +2,8 @@ const User = require('./user.model');
 
 exports.getUsers = (req, res) => {
     User.find()
-        .populate('transactions')
+        .populate({ path: 'debt', populate: { path: 'paidByUser', select: 'name' } })
+        .populate({ path: 'receiving', populate: { path: 'transactionMembers.user', select: 'name' } })
         .exec()
         .then(users => {
             if (users.length === 0) return res.status(404).json({'message':'Users not found'});
@@ -13,6 +14,9 @@ exports.getUsers = (req, res) => {
 
 exports.getUserById = (req, res) => {
     User.findById(req.params.idUser)
+        .populate({ path: 'debt', populate: { path: 'paidByUser', select: 'name' } })
+        .populate({ path: 'receiving', populate: { path: 'transactionMembers.user', select: 'name' } })
+        .exec()
         .then(user => res.json(user))
         .catch(err => res.json(err));
 }
@@ -24,7 +28,7 @@ exports.getUserByEmail = (userEmail) => {
 exports.newUser = (req, res) => {
     const user = new User(req.body);
     user.save()
-        .then(() => res.json(user))
+        .then(() => res.status(200).json(user))
         .catch(err => res.status(400).json(err));
 }
 
@@ -56,10 +60,10 @@ exports.removeAll = (req, res) => {
         });
 }
 
-exports.addMember = (member) => {
-    return User.findOneAndUpdate({_id: member.user}, {$addToSet: {members: member}}, {new: true});
+exports.addTransactionDebt = (transaction, userId) => {
+    return User.findOneAndUpdate({_id: userId}, {$addToSet: {debt: transaction}}, {new: true});
 }
 
-exports.addTransaction = (transaction, userId) => {
-    return User.findOneAndUpdate({_id: userId}, {$addToSet: {transactions: transaction}}, {new: true});
+exports.addTransactionReceiving = (transaction, userId) => {
+    return User.findOneAndUpdate({_id: userId}, {$addToSet: {receiving: transaction}}, {new: true});
 }
