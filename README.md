@@ -1,5 +1,5 @@
 # Easy Expense
-Repositório para a lógica da aplicação do projeto da disciplina de Princípios de Desenvolvimento Web
+Repositório para a API do projeto da disciplina de Princípios de Desenvolvimento Web
 
 - O projeto consiste em gerenciador de contas/despesas feitas por usuários. 
 O foco é permitir que um conjunto de pessoas possam facilmente ter controle de gastos.
